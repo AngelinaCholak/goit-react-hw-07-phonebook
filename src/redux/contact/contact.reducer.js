@@ -19,9 +19,12 @@ export const fetchContact = createAsyncThunk(
 );
 
 const initialState = {
-  contacts: null,
-  isLoading: false,
-  error: null,
+  contacts: {
+    items: [],
+    isLoading: false,
+    error: null,
+  },
+  filter: '',
 };
 
 const contactsSlice = createSlice({
