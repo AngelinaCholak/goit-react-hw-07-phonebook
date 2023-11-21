@@ -1,16 +1,18 @@
+
+import React from 'react';
+import PhoneBook from './PhoneBook/PhoneBook';
+import css from './App.module.css';
+import Contacts from './Contacts/Contacts';
+import Filter from './Filter/Filter';
+
 export const App = () => {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
+    <div className={css.container}>
+      <PhoneBook />
+      <Filter />
+      <Contacts />
     </div>
   );
 };
+
+export default App;

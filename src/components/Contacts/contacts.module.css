@@ -1,0 +1,27 @@
+
+ul {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+}
+
+li {
+  margin: 10px auto;
+  display: block;
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+
+.deleteButton {
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin-left: 10px;
+}
