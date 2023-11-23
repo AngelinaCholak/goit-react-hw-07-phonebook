@@ -3,24 +3,30 @@ import { useSelector, useDispatch } from 'react-redux';
 import { deleteContact, fetchContact } from 'redux/contact/contact.reducer';
 import PropTypes from 'prop-types';
 import css from './contacts.module.css';
-import { selectContacts, selectFilter } from 'redux/contact/selectors';
+import { selectContacts, selectFilter } from 'redux/contact/selectors'; 
 
 const Contacts = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
-  const filter = useSelector(selectFilter);
+  const filter = useSelector(selectFilter);  
 
   useEffect(() => {
     dispatch(fetchContact());
   }, [dispatch]);
 
-  
-  const filteredContacts = contacts.filter(
+  const getContactsItems = () => {
+    return contacts && contacts.items;
+  };
+
+  const items = getContactsItems();
+
+  // Filtering contacts based on the 'filter' state obtained via useSelector
+  const filteredContacts = items.filter(
     ({ name, phone }) =>
       name.toLowerCase().includes(filter.toLowerCase().trim()) ||
-      phone.toLowerCase().includes(filter.toLowerCase().trim()
-      )
+      phone.toLowerCase().includes(filter.toLowerCase().trim())
   );
+
   const handleDeleteContact = contactId => {
     dispatch(deleteContact(contactId));
   };
@@ -33,13 +39,6 @@ const Contacts = () => {
           {filteredContacts.map(contact => (
             <li key={contact.id}>
               <div>
-                {/* <img
-                  src={contact.avatar}
-                  alt={contact.name}
-                  className={css.contactImage}
-                  width="50" // Ширина зображення
-                  height="50" // Висота зображення
-                /> */}
                 <span>
                   {contact.name}: {contact.number}
                 </span>

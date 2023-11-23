@@ -74,7 +74,7 @@ const contactsSlice = createSlice({
       })
       .addCase(fetchContact.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.contacts = action.payload;
+        state.contacts.items = action.payload;
       })
       .addCase(fetchContact.rejected, (state, action) => {
         state.isLoading = false;
@@ -82,10 +82,10 @@ const contactsSlice = createSlice({
         toast.error('Failed to fetch contacts.');
       })
       .addCase(addContact.fulfilled, (state, action) => {
-        state.contacts.push(action.payload);
+        state.contacts.items.push(action.payload);
       })
       .addCase(deleteContact.fulfilled, (state, action) => {
-        state.contacts = state.contacts.filter(
+        state.contacts.items = state.contacts.items.filter(
           contact => contact.id !== action.payload
         );
       });
