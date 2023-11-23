@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 
 export const fetchContact = createAsyncThunk(
-  'contact/get',
+  'contacts/fetchAll',
   async (_, thunkApi) => {
     try {
       const { data } = await axios.get(
@@ -12,14 +12,13 @@ export const fetchContact = createAsyncThunk(
       );
       return data;
     } catch (err) {
-    
       return thunkApi.rejectWithValue(err.message);
     }
   }
 );
 // Додати новий контакт
-export const addContactAsync = createAsyncThunk(
-  'contacts/add',
+export const addContact = createAsyncThunk(
+  'contacts/addContact',
   async (contactData, thunkApi) => {
     try {
       const response = await axios.post(
@@ -34,8 +33,8 @@ export const addContactAsync = createAsyncThunk(
 );
 
 // Видалити контакт
-export const deleteContactAsync = createAsyncThunk(
-  'contacts/delete',
+export const deleteContact = createAsyncThunk(
+  'contacts/deleteContact',
   async (contactId, thunkApi) => {
     try {
       await axios.delete(
@@ -82,16 +81,18 @@ const contactsSlice = createSlice({
         state.error = action.payload;
         toast.error('Failed to fetch contacts.');
       })
-      .addCase(addContactAsync.fulfilled, (state, action) => {
+      .addCase(addContact.fulfilled, (state, action) => {
         state.contacts.push(action.payload);
       })
-      .addCase(deleteContactAsync.fulfilled, (state, action) => {
-        state.contacts = state.contacts.filter(contact => contact.id !== action.payload);
+      .addCase(deleteContact.fulfilled, (state, action) => {
+        state.contacts = state.contacts.filter(
+          contact => contact.id !== action.payload
+        );
       });
   },
 });
 
 
-export const { addContact, deleteContact } = contactsSlice.actions;
+// export const { addContact, deleteContact } = contactsSlice.actions;
 
 export const contactsReducer = contactsSlice.reducer;

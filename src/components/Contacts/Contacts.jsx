@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteContactAsync, fetchContact } from 'redux/contact/contact.reducer';
+import { deleteContact, fetchContact } from 'redux/contact/contact.reducer';
 import PropTypes from 'prop-types';
 import css from './contacts.module.css';
 import { selectContacts, selectFilter } from 'redux/contact/selectors';
@@ -24,7 +24,7 @@ const Contacts = () => {
       : contacts;
 
   const handleDeleteContact = contactId => {
-    dispatch(deleteContactAsync(contactId));
+    dispatch(deleteContact(contactId));
   };
 
   return (
