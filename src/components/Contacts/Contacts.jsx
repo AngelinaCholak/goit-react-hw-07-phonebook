@@ -20,7 +20,7 @@ const Contacts = () => {
 
   const items = getContactsItems();
 
-  // Filtering contacts based on the 'filter' state obtained via useSelector
+
   const filteredContacts = items.filter(
     ({ name, phone }) =>
       name.toLowerCase().includes(filter.toLowerCase().trim()) ||
