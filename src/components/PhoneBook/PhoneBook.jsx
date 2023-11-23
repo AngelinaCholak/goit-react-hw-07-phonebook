@@ -24,9 +24,11 @@ export const PhoneBook = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    const hasDuplicates = contacts.some(
-      contact => contact.name.toLowerCase() === name.toLowerCase()
-    );
+    const hasDuplicates =
+      Array.isArray(contacts) &&
+      contacts.some(
+        contact => contact.name.toLowerCase() === name.toLowerCase()
+      );
 
     if (hasDuplicates) {
       alert(`Oops, contact with name '${name}' already exists!`);

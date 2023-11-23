@@ -21,11 +21,13 @@ const Contacts = () => {
   const items = getContactsItems();
 
 
-  const filteredContacts = items.filter(
-    ({ name, phone }) =>
-      name.toLowerCase().includes(filter.toLowerCase().trim()) ||
-      phone.toLowerCase().includes(filter.toLowerCase().trim())
-  );
+  const filteredContacts = () =>
+    items.filter(
+  ({ name, phone }) =>
+    name.toLowerCase().includes(filter.toLowerCase().trim()) ||
+    phone.toLowerCase().includes(filter.toLowerCase().trim())
+);
+
 
   const handleDeleteContact = contactId => {
     dispatch(deleteContact(contactId));
@@ -40,7 +42,7 @@ const Contacts = () => {
             <li key={contact.id}>
               <div>
                 <span>
-                  {contact.name}: {contact.number}
+                  {contact.name}: {contact.phone}
                 </span>
                 <button
                   className={css.deleteButton}
