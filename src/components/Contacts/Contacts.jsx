@@ -21,12 +21,17 @@ const Contacts = () => {
   const items = getContactsItems();
 
 
-  const filteredContacts = () =>
-    items.filter(
-  ({ name, phone }) =>
-    name.toLowerCase().includes(filter.toLowerCase().trim()) ||
-    phone.toLowerCase().includes(filter.toLowerCase().trim())
-);
+const filteredContacts = () => {
+  if (items) {
+    return items.filter(
+      ({ name, phone }) =>
+        name.toLowerCase().includes(filter.toLowerCase().trim()) ||
+        phone.toLowerCase().includes(filter.toLowerCase().trim())
+    );
+  }
+  return [];
+};
+
 
 
   const handleDeleteContact = contactId => {
@@ -36,9 +41,9 @@ const Contacts = () => {
   return (
     <div>
       <h2>Contacts</h2>
-      {filteredContacts && filteredContacts.length > 0 && (
+      {filteredContacts().length > 0 && (
         <ul className={css.contactsList}>
-          {filteredContacts.map(contact => (
+          {filteredContacts().map(contact => (
             <li key={contact.id}>
               <div>
                 <span>
