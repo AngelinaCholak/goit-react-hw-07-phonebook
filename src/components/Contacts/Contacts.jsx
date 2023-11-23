@@ -1,42 +1,32 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteContact, fetchContact } from 'redux/contact/contact.reducer';
 import PropTypes from 'prop-types';
 import css from './contacts.module.css';
-import { selectContacts, selectFilter } from 'redux/contact/selectors'; 
+import { selectContacts, selectFilter } from 'redux/contact/selectors';
+import { deleteContact, fetchContact } from 'redux/contact/contact.actions';
 
 const Contacts = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
-  const filter = useSelector(selectFilter);  
+  const filter = useSelector(selectFilter);
 
   useEffect(() => {
     dispatch(fetchContact());
   }, [dispatch]);
 
-  const getContactsItems = () => {
-    return contacts && contacts.items;
-  };
+   const filteredContacts = () => {
+     const items = contacts?.items || []; 
+     const filteredItems = items.filter(
+       ({ name, phone }) =>
+         name.toLowerCase().includes(filter.toLowerCase().trim()) ||
+         phone.toLowerCase().includes(filter.toLowerCase().trim())
+     );
+     return filteredItems;
+   };
 
-  const items = getContactsItems();
-
-
-const filteredContacts = () => {
-  if (items) {
-    return items.filter(
-      ({ name, phone }) =>
-        name.toLowerCase().includes(filter.toLowerCase().trim()) ||
-        phone.toLowerCase().includes(filter.toLowerCase().trim())
-    );
-  }
-  return [];
-};
-
-
-
-  const handleDeleteContact = contactId => {
-    dispatch(deleteContact(contactId));
-  };
+   const handleDeleteContact = contactId => {
+     dispatch(deleteContact(contactId));
+   };
 
   return (
     <div>

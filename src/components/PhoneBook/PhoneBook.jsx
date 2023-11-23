@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/contact/contact.reducer';
 import { nanoid } from 'nanoid';
 import css from './PhoneBook.module.css';
 import { GoPersonAdd } from 'react-icons/go';
 import { selectContacts } from 'redux/contact/selectors';
+import { addContact } from 'redux/contact/contact.actions';
 
 export const PhoneBook = () => {
   const dispatch = useDispatch();
