@@ -14,15 +14,13 @@ const Contacts = () => {
     dispatch(fetchContact());
   }, [dispatch]);
 
-  const filteredContacts =
-    contacts && filter
-      ? contacts.filter(
-          contact =>
-            contact.name &&
-            contact.name.toLowerCase().includes(filter.toLowerCase())
-        )
-      : contacts;
-
+  
+  const filteredContacts = contacts.filter(
+    ({ name, phone }) =>
+      name.toLowerCase().includes(filter.toLowerCase().trim()) ||
+      phone.toLowerCase().includes(filter.toLowerCase().trim()
+      )
+  );
   const handleDeleteContact = contactId => {
     dispatch(deleteContact(contactId));
   };
