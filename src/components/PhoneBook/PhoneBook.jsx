@@ -4,12 +4,12 @@ import { addContact } from 'redux/contact/contact.reducer';
 import { nanoid } from 'nanoid';
 import css from './PhoneBook.module.css';
 import { GoPersonAdd } from 'react-icons/go';
+import { selectContacts } from 'redux/contact/selectors';
 
 export const PhoneBook = () => {
   const dispatch = useDispatch();
-  const selectContacts = state => state.contactsStore.contacts;
   const contacts = useSelector(selectContacts);
-  
+
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 

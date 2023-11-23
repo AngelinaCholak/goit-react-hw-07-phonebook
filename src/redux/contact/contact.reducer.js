@@ -82,7 +82,7 @@ const contactsSlice = createSlice({
         toast.error('Failed to fetch contacts.');
       })
       .addCase(addContact.fulfilled, (state, action) => {
-        state.contacts.items.push(action.payload);
+        state.contacts.items = [...state.contacts.items, action.payload];
       })
 
       .addCase(deleteContact.fulfilled, (state, action) => {
