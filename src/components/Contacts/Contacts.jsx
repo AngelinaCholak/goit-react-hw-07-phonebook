@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteContact, fetchContact } from 'redux/contact/contact.reducer';
+import { deleteContactAsync, fetchContact } from 'redux/contact/contact.reducer';
 import PropTypes from 'prop-types';
 import css from './contacts.module.css';
 import { selectContacts, selectFilter } from 'redux/contact/selectors';
@@ -24,7 +24,7 @@ const Contacts = () => {
       : contacts;
 
   const handleDeleteContact = contactId => {
-    dispatch(deleteContact(contactId));
+    dispatch(deleteContactAsync(contactId));
   };
 
   return (
@@ -34,13 +34,24 @@ const Contacts = () => {
         <ul className={css.contactsList}>
           {filteredContacts.map(contact => (
             <li key={contact.id}>
-              {contact.name}: {contact.number}
-              <button
-                className={css.deleteButton}
-                onClick={() => handleDeleteContact(contact.id)}
-              >
-                Delete
-              </button>
+              <div>
+                {/* <img
+                  src={contact.avatar}
+                  alt={contact.name}
+                  className={css.contactImage}
+                  width="50" // Ширина зображення
+                  height="50" // Висота зображення
+                /> */}
+                <span>
+                  {contact.name}: {contact.number}
+                </span>
+                <button
+                  className={css.deleteButton}
+                  onClick={() => handleDeleteContact(contact.id)}
+                >
+                  Delete
+                </button>
+              </div>
             </li>
           ))}
         </ul>

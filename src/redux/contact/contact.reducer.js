@@ -8,12 +8,42 @@ export const fetchContact = createAsyncThunk(
   async (_, thunkApi) => {
     try {
       const { data } = await axios.get(
-        'https://655cb80925b76d9884fdd6b3.mockapi.io/contacts'
+        'https://655ce6f925b76d9884fe22dd.mockapi.io/contact'
       );
       return data;
     } catch (err) {
     
       return thunkApi.rejectWithValue(err.message);
+    }
+  }
+);
+// Додати новий контакт
+export const addContactAsync = createAsyncThunk(
+  'contacts/add',
+  async (contactData, thunkApi) => {
+    try {
+      const response = await axios.post(
+        'https://655ce6f925b76d9884fe22dd.mockapi.io/contact',
+        contactData
+      );
+      return response.data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
+// Видалити контакт
+export const deleteContactAsync = createAsyncThunk(
+  'contacts/delete',
+  async (contactId, thunkApi) => {
+    try {
+      await axios.delete(
+        `https://655ce6f925b76d9884fe22dd.mockapi.io/contact/${contactId}`
+      );
+      return contactId;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
     }
   }
 );
@@ -33,18 +63,13 @@ const contactsSlice = createSlice({
   initialState,
 
   reducers: {
-    addContact(state, action) {
-      state.contacts = [...state.contacts, action.payload];
-    },
-    deleteContact(state, action) {
-      state.contacts = state.contacts.filter(
-        contact => contact.id !== action.payload
-      );
+    setFilter(state, action) {
+      state.filter = action.payload;
     },
   },
   extraReducers: builder => {
     builder
-      .addCase(fetchContact.pending, (state) => {
+      .addCase(fetchContact.pending, state => {
         state.isLoading = true;
         state.error = null;
       })
@@ -56,8 +81,14 @@ const contactsSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
         toast.error('Failed to fetch contacts.');
+      })
+      .addCase(addContactAsync.fulfilled, (state, action) => {
+        state.contacts.push(action.payload);
+      })
+      .addCase(deleteContactAsync.fulfilled, (state, action) => {
+        state.contacts = state.contacts.filter(contact => contact.id !== action.payload);
       });
-  }
+  },
 });
 
 
