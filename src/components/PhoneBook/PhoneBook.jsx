@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { nanoid } from 'nanoid';
 import css from './PhoneBook.module.css';
 import { GoPersonAdd } from 'react-icons/go';
 import { selectContacts } from 'redux/contact/selectors';
@@ -35,7 +34,7 @@ export const PhoneBook = () => {
       return;
     }
 
-    dispatch(addContact({ name, number, id: nanoid() }));
+    dispatch(addContact({ name, phone: number }));
     setName('');
     setNumber('');
   };
