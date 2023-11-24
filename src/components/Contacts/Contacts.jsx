@@ -14,19 +14,19 @@ const Contacts = () => {
     dispatch(fetchContact());
   }, [dispatch]);
 
-   const filteredContacts = () => {
-     const items = contacts?.items || []; 
-     const filteredItems = items.filter(
-       ({ name, phone }) =>
-         name.toLowerCase().includes(filter.toLowerCase().trim()) ||
-         phone.toLowerCase().includes(filter.toLowerCase().trim())
-     );
-     return filteredItems;
-   };
+  const filteredContacts = () => {
+    const items = contacts?.items || [];
+    const filteredItems = items.filter(
+      ({ name, phone }) =>
+        name.toLowerCase().includes(filter.toLowerCase().trim()) ||
+        phone.toLowerCase().includes(filter.toLowerCase().trim())
+    );
+    return filteredItems;
+  };
 
-   const handleDeleteContact = contactId => {
-     dispatch(deleteContact(contactId));
-   };
+  const handleDeleteContact = contactId => {
+    dispatch(deleteContact(contactId));
+  };
 
   return (
     <div>

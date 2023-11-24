@@ -45,10 +45,8 @@ const contactsSlice = createSlice({
           contact => contact.id !== action.payload
         );
       });
-
   },
 });
-
 
 // export const { addContact, deleteContact } = contactsSlice.actions;
 

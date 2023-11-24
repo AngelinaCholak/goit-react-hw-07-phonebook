@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore } from '@reduxjs/toolkit';
 import {
   persistStore,
   persistReducer,
@@ -10,8 +10,8 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { contactsReducer } from "./contact/contact.reducer";
-import { filterReducer } from "./contact/filter.reducer";
+import { contactsReducer } from './contact/contact.reducer';
+import { filterReducer } from './contact/filter.reducer';
 
 const contactsConfig = {
   key: 'contacts',
@@ -19,7 +19,6 @@ const contactsConfig = {
   whitelist: ['contacts'],
   // blacklist: ['isLoading', 'error'],
 };
-
 
 export const store = configureStore({
   reducer: {
@@ -34,4 +33,3 @@ export const store = configureStore({
     }),
 });
 export const persistor = persistStore(store);
-
